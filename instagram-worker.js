@@ -70,7 +70,7 @@ const delay = ms => new Promise(resolve => setTimeout(resolve, ms));
       } catch (sendError) {
         console.error(`Attempt ${attempt}/${maxAttempts} failed:`, sendError.message);
         
-        if (attempt >= maxAttempts)) {
+        if (attempt >= maxAttempts) {
           throw new Error('Max retry attempts reached');
         }
         
