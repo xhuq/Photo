@@ -1,7 +1,3 @@
-const uploadDir = path.join(__dirname, 'uploads');
-if (!fs.existsSync(uploadDir)) {
-  fs.mkdirSync(uploadDir, { recursive: true });
-}
 require('dotenv').config();
 const express = require('express');
 const helmet = require('helmet');
@@ -11,6 +7,11 @@ const multer = require('multer');
 const path = require('path');
 const { Worker } = require('worker_threads');
 const fs = require('fs');
+
+const uploadDir = path.join(__dirname, 'uploads');
+if (!fs.existsSync(uploadDir)) {
+  fs.mkdirSync(uploadDir, { recursive: true });
+}
 
 const app = express();
 const upload = multer({
