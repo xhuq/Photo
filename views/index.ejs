@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Instagram Photo Sender By Hater</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+            background: #000;
+        }
+
+        .floating-image {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://i.pinimg.com/736x/52/d5/41/52d54109a3c925bb54e857392f306cb4.jpg') no-repeat center center;
+            background-size: cover;
+            z-index: -1;
+            animation: float 6s ease-in-out infinite;
+        }
+
+        .overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 0;
+        }
+
+        .content {
+            position: relative;
+            z-index: 1;
+            text-align: center;
+            animation: fadeIn 2s ease-in-out;
+            flex: 1;
+            padding: 20px;
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+            margin-bottom: 1rem;
+        }
+
+        form {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: bold;
+            text-align: left;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 0.75rem;
+            margin-bottom: 1rem;
+            border: 2px solid rgba(255, 255, 255, 0.3);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.1);
+            color: #fff;
+        }
+
+        button {
+            background: #ff6f61;
+            color: #fff;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+            width: 100%;
+            margin-top: 1rem;
+        }
+
+        button:hover {
+            background: #ff3b2f;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 20px;
+            background: rgba(0, 0, 0, 0.5);
+            margin-top: auto;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-20px); }
+        }
+    </style>
+</head>
+<body>
+    <div class="floating-image"></div>
+    <div class="overlay"></div>
+
+    <div class="content">
+        <h1>Instagram Photo Sender</h1>
+        
+        <!-- Main Send Form -->
+        <form method="POST" action="/send" enctype="multipart/form-data">
+            <label for="username">Instagram Username:</label>
+            <input type="text" id="username" name="username" required>
+
+            <label for="password">Instagram Password:</label>
+            <input type="password" id="password" name="password" required>
+
+            <label for="choice">Send To:</label>
+            <select id="choice" name="choice" required>
+                <option value="inbox">Direct Message</option>
+                <option value="group">Group Chat</option>
+            </select>
+
+            <label for="target">Target Username/Group ID:</label>
+            <input type="text" id="target" name="target" required>
+
+            <label for="message_file">Image to Send (JPEG/PNG):</label>
+            <input type="file" id="message_file" name="message_file" 
+                   accept="image/jpeg, image/png" required>
+
+            <label for="delay">Delay Between Sends (ms):</label>
+            <input type="number" id="delay" name="delay" value="30000" required>
+
+            <button type="submit">Start Sending</button>
+        </form>
+
+        <!-- Stop Task Form -->
+        <form method="POST" action="/stop" style="margin-top: 2rem;">
+            <label for="taskId">Stop Task by ID:</label>
+            <input type="text" id="taskId" name="taskId" required>
+            <button type="submit" style="background: #dc3545;">Stop Sending</button>
+        </form>
+    </div>
+
+    <footer class="footer">
+        <p>© 2024 Instagram Photo Sender</p>
+        <p>Use responsibly - Automated messaging may violate Instagram's ToS</p>
+    </footer>
+</body>
+</html>
